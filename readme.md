@@ -1,2 +1,2 @@
 #this is a pig game on JS
-working with modol
+#working with modol in JS
