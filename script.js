@@ -19,5 +19,19 @@ const closeModal = function() {
 };
 
 btnCloseModal.addEventListener('click', closeModal);
-
 overlay.addEventListener('click', closeModal);
+
+//const keydownCloseModal = function() {
+//modal.classList.add('hidden');
+//overlay.classList.add('hidden');
+//};
+//document.addEventListener('keydown', keydownCloseModal);
+let myList = [];
+document.addEventListener('keydown', function(e) {
+    //console.log(e.key);
+    if (e.key === 'EScape') {
+        if (!modal.classList.contains('hidden')) {
+            closeModal();
+        }
+    }
+});
