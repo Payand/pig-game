@@ -13,7 +13,7 @@ const diceEl = document.querySelector('.dice');
 const buttonNew = document.querySelector('.btn--new');
 const buttonRoll = document.querySelector('.btn--roll');
 const buttonHold = document.querySelector('.btn--hold');
-
+// global variables
 let scores, currentScore, activePlayer, playing;
 
 // Starting conditons and initialzing
@@ -73,7 +73,7 @@ buttonHold.addEventListener('click', function() {
         document.getElementById(`score--${activePlayer}`).textContent =
             scores[activePlayer];
         // 2. Check if players's score is >= 100
-        if (scores[activePlayer] >= 20) {
+        if (scores[activePlayer] >= 100) {
             // Finish game
             playing = false;
             diceEl.classList.add('hidden');
