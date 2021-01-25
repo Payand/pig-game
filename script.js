@@ -1,37 +1,58 @@
 'use strict';
 
-const modal = document.querySelector('.modal');
-const overlay = document.querySelector('.overlay');
-const btnCloseModal = document.querySelector('.close-modal');
-const btnOpenModal = document.querySelectorAll('.show-modal');
+//Selecting elements
+const playerzeroEl = document.querySelector('.player--0');
+const playerOneEl = document.querySelector('.player--1');
 
-const openModal = function() {
-    modal.classList.remove('hidden');
-    overlay.classList.remove('hidden');
-};
+const scoreZeroEl = document.querySelector('#score--0');
+const scoreOneEl = document.getElementById('score--1');
+const currentZeroEl = document.getElementById('current--0');
+const currentoneEl = document.getElementById('current--1');
 
-for (let i = 0; i < btnOpenModal.length; i++)
-    btnOpenModal[i].addEventListener('click', openModal);
+const diceEl = document.querySelector('.dice');
+const buttonNew = document.querySelector('.btn--new');
+const buttonRoll = document.querySelector('.btn--roll');
+const buttonHold = document.querySelector('.btn--hold');
 
-const closeModal = function() {
-    modal.classList.add('hidden');
-    overlay.classList.add('hidden');
-};
+// Starting conditons
+scoreZeroEl.textContent = 0;
+scoreOneEl.textContent = 0;
+diceEl.classList.add('hidden');
 
-btnCloseModal.addEventListener('click', closeModal);
-overlay.addEventListener('click', closeModal);
+const scores = [0, 0];
+let currentScore = 0;
+let activePlayer = 0;
 
-//const keydownCloseModal = function() {
-//modal.classList.add('hidden');
-//overlay.classList.add('hidden');
-//};
-//document.addEventListener('keydown', keydownCloseModal);
-let myList = [];
-document.addEventListener('keydown', function(e) {
-    //console.log(e.key);
-    if (e.key === 'EScape') {
-        if (!modal.classList.contains('hidden')) {
-            closeModal();
-        }
+// Rolling dice functionality
+buttonRoll.addEventListener('click', function() {
+    //1. Genarating random dice roll
+    const dice = Math.trunc(Math.random() * 6) + 1;
+    // 2. Display dice
+    diceEl.classList.remove('hidden');
+    diceEl.src = `dice-${dice}.png`;
+    // 3. Check for rolled 1 : if true ,switch to next Player
+    if (dice !== 1) {
+        // Add dice to the current score
+        currentScore += dice;
+
+        document.getElementById(
+            `current--${activePlayer}`
+        ).textContent = currentScore;
+    } else {
+        // SWiching player
+        document.getElementById(`current--${activePlayer}`).textContent = 0;
+        currentScore = 0;
+        activePlayer = activePlayer === 0 ? 1 : 0;
+        playerzeroEl.classList.toggle('player--active');
+        playerOneEl.classList.toggle('player--active');
     }
+});
+
+buttonHold.addEventListener('click', function() {
+    // 1. Add current score to active player's score
+    scores[activePlayer] += currentScore;
+    // 2. Check if players's score is >= 100
+
+    // Finish game
+    // Switch tothe  next player
 });
