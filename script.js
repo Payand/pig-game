@@ -14,15 +14,27 @@ const buttonNew = document.querySelector('.btn--new');
 const buttonRoll = document.querySelector('.btn--roll');
 const buttonHold = document.querySelector('.btn--hold');
 
-// Starting conditons
-scoreZeroEl.textContent = 0;
-scoreOneEl.textContent = 0;
-diceEl.classList.add('hidden');
+let scores, currentScore, activePlayer, playing;
 
-const scores = [0, 0];
-let currentScore = 0;
-let activePlayer = 0;
-let playing = true;
+// Starting conditons and initialzing
+
+const init = function() {
+    scores = [0, 0];
+    currentScore = 0;
+    activePlayer = 0;
+    playing = true;
+    scoreZeroEl.textContent = 0;
+    scoreOneEl.textContent = 0;
+    currentZeroEl.textContent = 0;
+    currentoneEl.textContent = 0;
+    diceEl.classList.remove('hidden');
+    playerzeroEl.classList.remove('player--winner');
+    playerOneEl.classList.remove('player--winner');
+    playerzeroEl.classList.add('player--active');
+    playerOneEl.classList.remove('player--winner');
+};
+init();
+
 const switchPlayer = function() {
     document.getElementById(`current--${activePlayer}`).textContent = 0;
     currentScore = 0;
@@ -77,3 +89,5 @@ buttonHold.addEventListener('click', function() {
         }
     }
 });
+//reset button
+buttonNew.addEventListener('click', init);
